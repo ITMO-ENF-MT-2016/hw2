@@ -7,6 +7,7 @@ in memory, chances are, they are modifying the values on the same.
 Hardware
 ========
 Processor: Intel® Core™ i5-2410M CPU @ 2.30GHz × 4 
+
 Memory: 7.7 GiB
 
 Benchmark results
