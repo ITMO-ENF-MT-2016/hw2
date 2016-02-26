@@ -6,9 +6,9 @@ in memory, chances are, they are modifying the values on the same.
 
 Hardware
 ========
-Processor: Intel® Core™ i5-2410M CPU @ 2.30GHz × 4 
+Processor: Intel® Core™ i5 CPU @ 1.30GHz × 2
 
-Memory: 7.7 GiB
+Memory: 4 GiB
 
 Benchmark results
 =================
@@ -16,15 +16,15 @@ Benchmark results
 Base line of the false sharing:
 ```
 Benchmark                     Mode  Cnt  Score   Error  Units
-FalseSharing.baseline         avgt   25  6.143 ± 1.323  ns/op
-FalseSharing.baseline:reader  avgt   25  9.736 ± 2.675  ns/op
-FalseSharing.baseline:writer  avgt   25  2.551 ± 0.042  ns/op
+FalseSharing.baseline         avgt   25  11,826 ± 0,297  ns/op
+FalseSharing.baseline:reader  avgt   25  20,595 ± 0,600  ns/op
+FalseSharing.baseline:writer  avgt   25   3,057 ± 0,130  ns/op
 ```
 
 Approach via paddings:
 ```
 Benchmark                     Mode  Cnt  Score   Error  Units
-FalseSharing.padded           avgt   25  3.733 ± 0.573  ns/op
-FalseSharing.padded:reader    avgt   25  4.908 ± 1.160  ns/op
-FalseSharing.padded:writer    avgt   25  2.557 ± 0.062  ns/op
+FalseSharing.padded           avgt   25  3,258 ± 0,020  ns/op
+FalseSharing.padded:reader    avgt   25  3,494 ± 0,031  ns/op
+FalseSharing.padded:writer    avgt   25  3,021 ± 0,019  ns/op
 ```
