@@ -40,41 +40,156 @@ import java.util.concurrent.TimeUnit;
 @Fork(5)
 @Warmup(iterations = 5)
 @Measurement(iterations = 5)
-@Threads(value = 4)
 public class ExpensiveVolatile {
 
+    @State(Scope.Thread)
+    public static class StateInt {
+        int x;
+    }
+
+    @Benchmark
+    @Group("justIntThread")
+    public int reader(StateInt s) {
+        return s.x;
+    }
+
+    @Benchmark
+    @Group("justIntThread")
+    public void writer(StateInt s) {
+        s.x++;
+    }
+
+
+    @State(Scope.Thread)
+    public static class StateVolatileInt {
+        volatile int x;
+    }
+
+    @Benchmark
+    @Group("volatileIntThread")
+    public int reader(StateVolatileInt s) {
+        return s.x;
+    }
+
+    @Benchmark
+    @Group("volatileIntThread")
+    public void writer(StateVolatileInt s) {
+        s.x++;
+    }
+
+
+    //=============
+
+
     @State(Scope.Benchmark)
-    public static class StateNonVolatile {
-        int xNonVolatile;
+    public static class StateIntShared {
+        int x;
     }
 
     @Benchmark
-    @Group("nonVolatile")
-    public int reader(StateNonVolatile s) {
-        return s.xNonVolatile;
+    @Group("justIntShared")
+    public int reader(StateIntShared s) {
+        return s.x;
     }
 
     @Benchmark
-    @Group("nonVolatile")
-    public void writer(StateNonVolatile s) {
-        s.xNonVolatile++;
+    @Group("justIntShared")
+    public void writer(StateIntShared s) {
+        s.x++;
     }
 
 
     @State(Scope.Benchmark)
-    public static class StateVolatile {
-        volatile int xVolatile;
+    public static class StateVolatileIntShared {
+        volatile int x;
     }
 
     @Benchmark
-    @Group("volatile")
-    public int reader(StateVolatile s) {
-        return s.xVolatile;
+    @Group("volatileIntShared")
+    public int reader(StateVolatileIntShared s) {
+        return s.x;
     }
 
     @Benchmark
-    @Group("volatile")
-    public void writer(StateVolatile s) {
-        s.xVolatile++;
+    @Group("volatileIntShared")
+    public void writer(StateVolatileIntShared s) {
+        s.x++;
     }
+
+    //=============
+
+    @State(Scope.Thread)
+    public static class StateLong {
+        long x;
+    }
+
+    @Benchmark
+    @Group("justLongThread")
+    public long reader(StateLong s) {
+        return s.x;
+    }
+
+    @Benchmark
+    @Group("justLongThread")
+    public void writer(StateLong s) {
+        s.x++;
+    }
+
+
+    @State(Scope.Thread)
+    public static class StateVolatileLong {
+        volatile long x;
+    }
+
+    @Benchmark
+    @Group("volatileLongThread")
+    public long reader(StateVolatileLong s) {
+        return s.x;
+    }
+
+    @Benchmark
+    @Group("volatileLongThread")
+    public void writer(StateVolatileLong s) {
+        s.x++;
+    }
+
+
+    //=============
+
+
+    @State(Scope.Benchmark)
+    public static class StateLongShared {
+        long x;
+    }
+
+    @Benchmark
+    @Group("justLongShared")
+    public long reader(StateLongShared s) {
+        return s.x;
+    }
+
+    @Benchmark
+    @Group("justLongShared")
+    public void writer(StateLongShared s) {
+        s.x++;
+    }
+
+
+    @State(Scope.Benchmark)
+    public static class StateVolatileLongShared {
+        volatile long x;
+    }
+
+    @Benchmark
+    @Group("volatileLongShared")
+    public long reader(StateVolatileLongShared s) {
+        return s.x;
+    }
+
+    @Benchmark
+    @Group("volatileLongShared")
+    public void writer(StateVolatileLongShared s) {
+        s.x++;
+    }
+
 }

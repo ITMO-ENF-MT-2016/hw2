@@ -6,7 +6,7 @@ in memory, chances are, they are modifying the values on the same.
 
 Hardware
 ========
-Processor: Intel® Core™ i5 CPU @ 1.30GHz × 2
+Processor: Intel® Core™ i5 CPU @ 1.30GHz × 4
 
 Memory: 4 GiB
 
