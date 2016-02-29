@@ -35,4 +35,8 @@ VS.volatileShared:writer           48,041   80,743  161,682   333,455
 VS.volatileThread:reader            3,608    6,153   12,902    25,437
 VS.volatileThread:writer            8,725   14,141   27,811    56,897
 
-``
+```
+
+![EV_Graph](VS_Synchro_vs_Lock.png)
+
+![EV_Graph](VS.png)

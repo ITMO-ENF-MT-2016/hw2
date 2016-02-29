@@ -44,3 +44,13 @@ VM.SM1000:put                                 1376,452  1164,541  1100,944  1625
 VM.SM1000:remove                               336,224   480,476   494,504  1139,322  3024,613
 
 ```
+
+![EV_Graph](VM.CHM.png)
+
+![EV_Graph](VM.containsKey.png)
+
+![EV_Graph](VM.get.png)
+
+![EV_Graph](VM.put.png)
+
+![EV_Graph](VM.remove.png)
