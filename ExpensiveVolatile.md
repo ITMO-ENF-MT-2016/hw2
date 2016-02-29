@@ -1,126 +1,33 @@
 Expensive volatile
 =============
-Verbal explanation
+Выявленные эффекты:
+1. С увеличением числа потоков растет время выполнения каждой операции, так как
+на потоки тратится много ресурсов, по сравнению с обычными операциями чтения и записи
+2. На переменную, разделенную между потоками тратится значительно больше времени, чем
+на обычную
+3. Запись в volatile переменные дороже, чем в обычные, а чтение выполняется за такое же время
+
+Более подробно - устно.
 
 Hardware
 ========
-Processor: Intel® Core™ i5 CPU @ 1.30GHz × 2
+Processor: Intel® Core™ i5 CPU @ 1.30GHz × 4
 
 Memory: 4 GiB
 
 Benchmark results
 =================
 
-Non volatile, 1 thread, Scope.Thread:
+Stats:
 ```
-Benchmark                             Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.nonVolatile         avgt   25  3,413 ± 0,117  ns/op
-ExpensiveVolatile.nonVolatile:reader  avgt   25  3,764 ± 0,199  ns/op
-ExpensiveVolatile.nonVolatile:writer  avgt   25  3,063 ± 0,051  ns/op
-
-```
-
-Volatile, 1 thread, Scope.Thread:
-```
-Benchmark                     Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.volatile            avgt   25  6,239 ± 0,247  ns/op
-ExpensiveVolatile.volatile:reader     avgt   25  3,692 ± 0,211  ns/op
-ExpensiveVolatile.volatile:writer     avgt   25  8,787 ± 0,288  ns/op
-
-```
-
-Non volatile, 1 thread, Scope.Benchmark:
-```
-Benchmark                             Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.nonVolatile         avgt   25  11,633 ± 0,254  ns/op
-ExpensiveVolatile.nonVolatile:reader  avgt   25  20,257 ± 0,492  ns/op
-ExpensiveVolatile.nonVolatile:writer  avgt   25   3,010 ± 0,055  ns/op
-
-```
-
-Volatile, 1 thread, Scope.Benchmark:
-```
-Benchmark                     Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.volatile            avgt   25  29,311 ± 4,174  ns/op
-ExpensiveVolatile.volatile:reader     avgt   25  26,502 ± 2,652  ns/op
-ExpensiveVolatile.volatile:writer     avgt   25  32,120 ± 5,798  ns/op
-
-```
-
----
-
-
-Non volatile, 2 threads, Scope.Thread:
-```
-Benchmark                             Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.nonVolatile         avgt   25  3,424 ± 0,082  ns/op
-ExpensiveVolatile.nonVolatile:reader  avgt   25  3,785 ± 0,137  ns/op
-ExpensiveVolatile.nonVolatile:writer  avgt   25  3,062 ± 0,048  ns/op
-
-```
-
-Volatile, 2 threads, Scope.Thread:
-```
-Benchmark                     Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.volatile            avgt   25  6,176 ± 0,231  ns/op
-ExpensiveVolatile.volatile:reader     avgt   25  3,639 ± 0,201  ns/op
-ExpensiveVolatile.volatile:writer     avgt   25  8,713 ± 0,265  ns/op
-
-```
-
-Non volatile, 2 threads, Scope.Benchmark:
-```
-Benchmark                             Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.nonVolatile         avgt   25  11,635 ± 0,233  ns/op
-ExpensiveVolatile.nonVolatile:reader  avgt   25  20,293 ± 0,459  ns/op
-ExpensiveVolatile.nonVolatile:writer  avgt   25   2,978 ± 0,024  ns/op
-
-```
-
-Volatile, 2 threads, Scope.Benchmark:
-```
-Benchmark                             Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.volatile            avgt   25  34,619 ± 3,914  ns/op
-ExpensiveVolatile.volatile:reader     avgt   25  31,003 ± 6,399  ns/op
-ExpensiveVolatile.volatile:writer     avgt   25  38,235 ± 3,452  ns/op
-
-```
-
----
-
-
-Non volatile, 4 threads, Scope.Thread:
-```
-Benchmark                             Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.nonVolatile         avgt   25   5,416 ± 0,316  ns/op
-ExpensiveVolatile.nonVolatile:reader  avgt   25   7,456 ± 0,448  ns/op
-ExpensiveVolatile.nonVolatile:writer  avgt   25   3,375 ± 0,199  ns/op
-
-```
-
-Volatile, 4 threads, Scope.Thread:
-```
-Benchmark                     Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.volatile            avgt   25  10,338 ± 0,519  ns/op
-ExpensiveVolatile.volatile:reader     avgt   25   6,196 ± 0,903  ns/op
-ExpensiveVolatile.volatile:writer     avgt   25  14,481 ± 0,455  ns/op
-
-```
-
-Non volatile, 4 threads, Scope.Benchmark:
-```
-Benchmark                             Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.nonVolatile         avgt   25  22,980 ± 1,009  ns/op
-ExpensiveVolatile.nonVolatile:reader  avgt   25  41,762 ± 2,415  ns/op
-ExpensiveVolatile.nonVolatile:writer  avgt   25   4,199 ± 0,563  ns/op
-
-```
-
-Volatile, 4 threads, Scope.Benchmark:
-```
-Benchmark                             Mode  Cnt  Score   Error  Units
-ExpensiveVolatile.volatile            avgt   25  55,051 ± 1,591  ns/op
-ExpensiveVolatile.volatile:reader     avgt   25  33,471 ± 2,156  ns/op
-ExpensiveVolatile.volatile:writer     avgt   25  76,631 ± 1,853  ns/op
+Test                                2       4       8        16
+EV.justIntShared:reader          20,809  42,036   70,810  118,054
+EV.justIntShared:writer           2,971   4,011    8,441   16,638
+EV.justIntThread:reader           3,465   6,973   13,788   27,077
+EV.justIntThread:writer           3,007   3,166    6,120   12,142
+EV.volatileIntShared:reader      30,764  37,275   62,091  107,697
+EV.volatileIntShared:writer      43,157  79,922  163,101  337,392
+EV.volatileIntThread:reader       3,448   6,981   12,485   27,179
+EV.volatileIntThread:writer       8,471  13,833   28,268   55,865
 
 ```
