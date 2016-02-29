@@ -1,0 +1,8 @@
+EV.justIntShared:reader                         20,637  20,809  42,036   70,810  118,054
+EV.justIntShared:writer                          2,965   2,971   4,011    8,441   16,638
+EV.justIntThread:reader                          3,442   3,465   6,973   13,788   27,077
+EV.justIntThread:writer                          2,968   3,007   3,166    6,120   12,142
+EV.volatileIntShared:reader                     35,693  30,764  37,275   62,091  107,697
+EV.volatileIntShared:writer                     42,359  43,157  79,922  163,101  337,392
+EV.volatileIntThread:reader                      3,638   3,448   6,981   12,485   27,179
+EV.volatileIntThread:writer                      8,682   8,471  13,833   28,268   55,865
